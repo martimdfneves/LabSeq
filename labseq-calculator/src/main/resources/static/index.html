@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Labseq Sequence Calculator</title>
+</head>
+<body>
+    <h1>Labseq Sequence Calculator</h1>
+    <label for="n">Enter n:</label>
+    <input type="text" id="n" placeholder="Enter a non-negative integer">
+    <button onclick="calculateLabseq()">Calculate</button>
+    <p id="result"></p>
+
+    <script>
+        function calculateLabseq() {
+            const n = document.getElementById("n").value;
+
+            // Send the request to the server
+            fetch(`/labseq/${n}`)
+                .then(response => response.text()) // Parse the response as text
+                .then(data => {
+                    document.getElementById("result").innerText = `l(${n}) = ${data}`;
+                })
+                .catch(error => {
+                    console.error(error);
+                    document.getElementById("result").innerText = "An error occurred.";
+                });
+        }
+    </script>
+</body>
+</html>
